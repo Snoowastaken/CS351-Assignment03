@@ -16,9 +16,6 @@ public class Permutations {
         return output.toString();
     }
 
-    public static int getnumberOfPermutations(String str){
-
-    }
 
     public static void main(String[] args){
         String wordPerm = "FALL";
