@@ -73,11 +73,10 @@ public class Permutations {
                 output.append(entry.getValue());
             }
         }
-
         System.out.println("Base word: " + str);
         System.out.println("Number of permutations from simulation: " + unique);
         System.out.println("Number of unique permutations: " + uniquePermutations(str));
-        System.out.println("Number of trials: " + numTrials);
+        System.out.println("Results from " + numTrials + " trials:");
         System.out.print(output.toString());
 
 
