@@ -108,8 +108,6 @@ public class Permutations {
                 repetitions.put(key, 1);
             }
         }
-        //print number of permutations that include the pattern
-        StringBuilder output = new StringBuilder();
         int unique = 0;
         for(Map.Entry<String, Integer> entry : repetitions.entrySet()){
             if(entry.getValue() >= 1){
@@ -120,6 +118,48 @@ public class Permutations {
         System.out.println("Number of unique permutations: " + uniquePermutations(str));
         System.out.println("Number of permutations that include " + includePattern + ": " + unique);
         System.out.println(successfulTrials + " successes in " + numTrials + " trials; proportion: " + proportion);
+    }
+
+    public static void exclude(String str, int numTrials, String excludePattern){
+        String[] permutations = new String[numTrials];
+        for(int i = 0; i < numTrials; i++){
+            permutations[i] = shuffle(str);
+        }
+        for(int i = 0; i < permutations.length; i++) {
+            if (permutations[i].contains(excludePattern)) {
+                permutations[i] = null;
+            }
+        }
+        List<String> list = new ArrayList<String>(Arrays.asList(permutations));
+        list.removeAll(Collections.singleton(null));
+        permutations = list.toArray(new String[list.size()]);
+
+        int successfulTrials = permutations.length;
+        double proportion = (double)successfulTrials/numTrials;
+
+        HashMap<String, Integer> repetitions = new HashMap<String, Integer>();
+        for(int i = 0; i< permutations.length; i++){
+            String key = permutations[i];
+            if(repetitions.containsKey(key)){
+                repetitions.put(key, repetitions.get(key) + 1);
+            }else{
+                repetitions.put(key, 1);
+            }
+        }
+        int unique = 0;
+        for(Map.Entry<String, Integer> entry : repetitions.entrySet()){
+            if(entry.getValue() >= 1){
+                unique++;
+            }
+        }
+        System.out.println("Base word: " + str);
+        System.out.println("Number of unique permutations: " + uniquePermutations(str));
+        System.out.println("Number of permutations that exclude " + excludePattern + ": " + unique);
+        System.out.println(successfulTrials + " successes in " + numTrials + " trials; proportion: " + proportion);
+    }
+
+    public static void ExcludeandInclude(String str, int numTrials, String includePattern, String excludePattern){
+
     }
 
 
@@ -159,12 +199,11 @@ public class Permutations {
         //check if includePattern is null, if not, make sure only permutations that include the pattern are in the array
         if(includePattern != null){
             include(wordPerm, numTrials, includePattern);
-
+        } else if (excludePattern != null) {
+            exclude(wordPerm, numTrials, excludePattern);
         } else {
             normal(wordPerm, numTrials);
         }
-
-
 
 
     }
