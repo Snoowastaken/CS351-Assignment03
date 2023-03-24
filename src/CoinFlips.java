@@ -75,7 +75,6 @@ public class CoinFlips {
                     break;
             }
         }
-        coinFlips(10, probHeads);
 
 
     }
