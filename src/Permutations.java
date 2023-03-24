@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.concurrent.LinkedTransferQueue;
 
 public class Permutations {
 
@@ -189,6 +188,14 @@ public class Permutations {
                 unique++;
             }
         }
+        //print repetitions hashmap
+        for (Map.Entry<String, Integer> entry : repetitions.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+
+        }
+        //print repetitions hashmap size
+        System.out.println(repetitions.size());
+
         System.out.println("Base word: " + str);
         System.out.println("Number of unique permutations: " + uniquePermutations(str));
         System.out.println("Number of permutations that include " + includePattern + " and exclude " + excludePattern + ": " + unique);
