@@ -107,15 +107,10 @@ public class Permutations {
                 repetitions.put(key, 1);
             }
         }
-        int unique = 0;
-        for(Map.Entry<String, Integer> entry : repetitions.entrySet()){
-            if(entry.getValue() >= 1){
-                unique++;
-            }
-        }
+        int estimatedNum = (int) (proportion * uniquePermutations(str));
         System.out.println("Base word: " + str);
         System.out.println("Number of unique permutations: " + uniquePermutations(str));
-        System.out.println("Number of permutations that include " + includePattern + ": " + unique);
+        System.out.println("Estimated number of permutations that include " + includePattern + ": " + estimatedNum);
         System.out.println(successfulTrials + " successes in " + numTrials + " trials; proportion: " + proportion);
     }
 
@@ -145,15 +140,10 @@ public class Permutations {
                 repetitions.put(key, 1);
             }
         }
-        int unique = 0;
-        for(Map.Entry<String, Integer> entry : repetitions.entrySet()){
-            if(entry.getValue() >= 1){
-                unique++;
-            }
-        }
+        int estimatedNum = (int) (proportion * uniquePermutations(str));
         System.out.println("Base word: " + str);
         System.out.println("Number of unique permutations: " + uniquePermutations(str));
-        System.out.println("Number of permutations that exclude " + excludePattern + ": " + unique);
+        System.out.println("Estimated number of permutations that exclude " + excludePattern + ": " + estimatedNum);
         System.out.println(successfulTrials + " successes in " + numTrials + " trials; proportion: " + proportion);
     }
 
@@ -173,7 +163,6 @@ public class Permutations {
 
         int successfulTrials = permutations.length;
         double proportion = (double)successfulTrials/numTrials;
-        int unique = 0;
         HashMap<String, Integer> repetitions = new HashMap<String, Integer>();
         for(int i = 0; i< permutations.length; i++){
             String key = permutations[i];
@@ -183,22 +172,10 @@ public class Permutations {
                 repetitions.put(key, 1);
             }
         }
-        for(Map.Entry<String, Integer> entry : repetitions.entrySet()){
-            if(entry.getValue() >= 1){
-                unique++;
-            }
-        }
-        //print repetitions hashmap
-        for (Map.Entry<String, Integer> entry : repetitions.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue());
-
-        }
-        //print repetitions hashmap size
-        System.out.println(repetitions.size());
-
+        int estimatedNum = (int) (proportion * uniquePermutations(str));
         System.out.println("Base word: " + str);
         System.out.println("Number of unique permutations: " + uniquePermutations(str));
-        System.out.println("Number of permutations that include " + includePattern + " and exclude " + excludePattern + ": " + unique);
+        System.out.println("Estimated number of permutations that include " + includePattern + " and exclude " + excludePattern + ": " + estimatedNum);
         System.out.println(successfulTrials + " successes in " + numTrials + " trials; proportion: " + proportion);
     }
 
