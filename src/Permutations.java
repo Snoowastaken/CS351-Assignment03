@@ -1,4 +1,5 @@
 import java.util.*;
+import java.text.DecimalFormat;
 
 public class Permutations {
 
@@ -110,7 +111,8 @@ public class Permutations {
         System.out.println("Base word: " + str);
         System.out.println("Number of unique permutations: " + uniquePermutations(str));
         System.out.println("Estimated number of permutations that include " + includePattern + ": " + estimatedNum);
-        System.out.println(successfulTrials + " successes in " + numTrials + " trials; proportion: " + proportion);
+        DecimalFormat ft = new DecimalFormat("#.0000");
+        System.out.println(successfulTrials + " successes in " + numTrials + " trials; proportion: " + ft.format(proportion));
     }
 
     public static void exclude(String str, int numTrials, String excludePattern) {
@@ -143,7 +145,8 @@ public class Permutations {
         System.out.println("Base word: " + str);
         System.out.println("Number of unique permutations: " + uniquePermutations(str));
         System.out.println("Estimated number of permutations that exclude " + excludePattern + ": " + estimatedNum);
-        System.out.println(successfulTrials + " successes in " + numTrials + " trials; proportion: " + proportion);
+        DecimalFormat ft = new DecimalFormat("#.0000");
+        System.out.println(successfulTrials + " successes in " + numTrials + " trials; proportion: " + ft.format(proportion));
     }
 
     public static void ExcludeandInclude(String str, int numTrials, String includePattern, String excludePattern) {
@@ -175,7 +178,8 @@ public class Permutations {
         System.out.println("Base word: " + str);
         System.out.println("Number of unique permutations: " + uniquePermutations(str));
         System.out.println("Estimated number of permutations that include " + includePattern + " and exclude " + excludePattern + ": " + estimatedNum);
-        System.out.println(successfulTrials + " successes in " + numTrials + " trials; proportion: " + proportion);
+        DecimalFormat ft = new DecimalFormat("#.0000");
+        System.out.println(successfulTrials + " successes in " + numTrials + " trials; proportion: " + ft.format(proportion));
     }
 
     public static void main(String[] args) {
