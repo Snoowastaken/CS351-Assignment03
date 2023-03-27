@@ -1,5 +1,4 @@
 import java.util.*;
-import java.math.*;
 import java.text.DecimalFormat;
 
 public class CoinFlips {
@@ -49,7 +48,23 @@ public class CoinFlips {
         int widthHisto = width;
         HashMap<Integer, Integer> frequenciesHisto = frequencies;
         HashMap<Integer, Double> probabilitiesHisto = probabilities;
+        //print the histogram
+        for (int i = 0; i < frequenciesHisto.size(); i++) {
+            int key = i + 1;
+            double probability = probabilitiesHisto.get(key);
+            DecimalFormat ft = new DecimalFormat("#.000000");
+            if(key < 10){
+                System.out.print("Est.Prob.(MaxRunLength = 0" + key + "): " + ft.format(probability) + "|");
+            } else {
+                System.out.print("Est.Prob.(MaxRunLength = " + key + "): " + ft.format(probability) + "|");
+            }
+            //print the histogram bars using the probability
+            for (int j = 0; j < (int) (widthHisto * probability); j++) {
+                System.out.print("#");
+            }
 
+            System.out.println();
+        }
 
     }
 
@@ -92,29 +107,17 @@ public class CoinFlips {
         for (int i = 0; i < numTrials; i++) {
             longestSequences[i] = coinFlips(numCoinFlips, probHeads);
         }
-        //create hashmap of frequencies of longest sequences
+        //create hashmap of frequencies of longest sequences, create keys from 1 to numCoinFlips with default value of 0
         HashMap<Integer, Integer> frequencies = new HashMap<Integer, Integer>();
+        for (int i = 1; i <= numCoinFlips; i++) {
+            frequencies.put(i, 0);
+        }
+        //frequencies of each longest sequence to hashmap
         for (int i = 0; i < longestSequences.length; i++) {
             int key = longestSequences[i];
-            if (frequencies.containsKey(key)) {
-                frequencies.put(key, frequencies.get(key) + 1);
-            } else {
-                frequencies.put(key, 1);
-            }
+            int value = frequencies.get(key);
+            frequencies.put(key, value + 1);
         }
-        //print value and key of hashmap, FOR TESTING DELETE LATER
-        for(Map.Entry<Integer, Integer> entry : frequencies.entrySet()) {
-            int key = entry.getKey();
-            int value = entry.getValue();
-            System.out.println(key + " " + value);
-        }
-        //add up the values of the hashmap, FOR TESTING DELETE LATER
-        int sum = 0;
-        for(Map.Entry<Integer, Integer> entry : frequencies.entrySet()){
-            sum += entry.getValue();
-        }
-        //print sum of values of hashmap, FOR TESTING DELETE LATER
-        System.out.println("Sum: " + sum);
 
         //find probability of each longest sequence
         HashMap<Integer, Double> probabilities = new HashMap<Integer, Double>();
@@ -143,8 +146,5 @@ public class CoinFlips {
         System.out.println("Analyzing runs in sequences of length " + longestLength + " with p = " + ft.format(probHeads));
         System.out.println("Results from " + numTrials + " trials:");
         histogram(frequencies, probabilities, widthHisto);
-
-
-
     }
 }
